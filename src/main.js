@@ -9,9 +9,19 @@ import App from './App'
 // import Home from './components/HelloFromVux'
 import Start from './pages/Start'
 import Login from './pages/Login'
+import UserAgreement from './pages/UserAgreement'
+import Home from './pages/Home'
+import Search from './pages/Search'
+import Index from './pages/Index/List'
+
 const routes = [
-  { path: '/',  component: Start },
-  { path: '/login', component: Login }
+  { path: '/start',  component: Start },
+  { path: '/login', component: Login },
+  { path: '/agree', component: UserAgreement },
+  { path: '/search', component: Search },
+  { path: '/home', component: Home, children: [
+    { path: '', component: Index },
+  ]},
 ]
 
 const router = new VueRouter({

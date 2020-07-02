@@ -28,3 +28,8 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## vux 地址
+https://doc.vux.li/zh-CN/components/view-box.html
+## 原型图地址
+https://modao.cc/app/f1946eb97eeb003144cf4f8906984a904e62c4e0#screen=skbkgvo7siegajt
