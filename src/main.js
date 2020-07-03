@@ -13,6 +13,7 @@ import UserAgreement from './pages/UserAgreement'
 import Home from './pages/Home'
 import Search from './pages/Search'
 import Index from './pages/Index/List'
+import Detail from './pages/Index/detail'
 
 const routes = [
   { path: '/start',  component: Start },
@@ -20,7 +21,9 @@ const routes = [
   { path: '/agree', component: UserAgreement },
   { path: '/search', component: Search },
   { path: '/home', component: Home, children: [
-    { path: '', component: Index },
+    { path: '', redirect: '/home/list'},
+    { path: '/home/list', component: Index },
+    { path: '/home/list/:id', component: Detail },
   ]},
 ]
 
