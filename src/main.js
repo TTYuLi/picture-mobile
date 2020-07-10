@@ -15,6 +15,15 @@ import Search from './pages/Search'
 import Index from './pages/Index/List'
 import Detail from './pages/Index/detail'
 
+import HomePage from './pages/Space/HomePage'
+import Album from  './pages/Space/Album'
+import Fans from './pages/Space/Fans'
+import Chart from './pages/Space/Chart'
+
+import Find from './pages/Find/List'
+
+import Message from './pages/Message/Index'
+import My from './pages/My/Index'
 const routes = [
   { path: '/start',  component: Start },
   { path: '/login', component: Login },
@@ -24,7 +33,14 @@ const routes = [
     { path: '', redirect: '/home/list'},
     { path: '/home/list', component: Index },
     { path: '/home/list/:id', component: Detail },
+    { path: '/home/find', component: Find},
+    { path: '/home/message', component: Message},
+    { path: '/home/my', component: My},
   ]},
+  { path: '/homePage', component: HomePage },
+  { path: '/album', component: Album },
+  { path: '/fans', component: Fans },
+  { path: '/chart', component: Chart },
 ]
 
 const router = new VueRouter({

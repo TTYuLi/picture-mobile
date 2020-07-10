@@ -9,12 +9,13 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 32 32" width="24" height="24" style="fill: rgb(255, 255, 255);"><path d="M5.778 13.333c1.227 0 2.222 0.995 2.222 2.222s-0.995 2.222-2.222 2.222c-1.227 0-2.222-0.995-2.222-2.222s0.995-2.222 2.222-2.222zM16 13.333c1.227 0 2.222 0.995 2.222 2.222s-0.995 2.222-2.222 2.222c-1.227 0-2.222-0.995-2.222-2.222s0.995-2.222 2.222-2.222zM26.222 13.333c1.227 0 2.222 0.995 2.222 2.222s-0.995 2.222-2.222 2.222c-1.227 0-2.222-0.995-2.222-2.222s0.995-2.222 2.222-2.222z"></path></svg>
     </div>
     <img class="bg" src="/static/images/detail/detail1.jpg" alt="">
+    <!-- 主页卡片模块 -->
     <!-- <transition name="card"> -->
-      <div class="card" v-if="!isVisibleShareCard">
+      <div :class="{card: true, animate: slideToggle, animateBack: animateBack}" v-if="isVisibleHomeCard" @click="toggleFade" >
         <div class="widget">
           <span> </span>
         </div>
-        <div class="avator">
+        <div class="avator" @click.stop="toHomePage">
           <img src="/static/images/detail/avator1.png" alt="">
           <span class="name">倾听他的故事</span>
           <span class="works">他的作品</span>
@@ -37,14 +38,18 @@
             </div>
           </div>
           <div class="action">
-            <div class="collection" @click="showCollection">
-              <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="64 64 896 896" width="24" height="24" style="fill: rgb(255, 255, 255);"><path d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"></path></svg>
+            <div class="collection" @click.stop="showCollection" :style="{ background: collected? 'rgb(255, 0, 0)' : 'rgb(45, 45, 45)'}">
+              <transition name="scale">
+              <svg v-if="collected" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="64 64 896 896" width="24" height="24" style="fill: rgb(255, 255, 255);"><path d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9z"></path></svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="64 64 896 896" width="24" height="24" style="fill: rgb(255, 255, 255);"><path d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"></path></svg>
+              </transition>
             </div>
             <div class="downLoad">下载壁纸 </div>
           </div>
         </div>
       </div>
     <!-- </transition> -->
+    <!-- 分享模块 -->
      <transition name="bounce">
       <div class="share_card" v-if="isVisibleShareCard">
         <div class="share_container">
@@ -94,9 +99,9 @@
         <div class="cancel" @click="hideShareCard">取消</div>
       </div>
      </transition>
-
+      <!-- 收藏卡片模块 -->
      <div class="collect_card_modal" v-if="isVisibleCollectCard">
-       <div  class="collect_card">
+       <div class="collect_card" @click="collect_click">
           <div class="title">请选择收藏的位置</div>
           <div class="close" @click="hideCollection">
             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 32 32" width="20" height="20" style="fill: rgb(16, 16, 16);"><path d="M16 14.115l6.6-6.6 1.885 1.885-6.6 6.6 6.6 6.6-1.885 1.885-6.6-6.6-6.6 6.6-1.885-1.885 6.6-6.6-6.6-6.6 1.885-1.885z"></path></svg>
@@ -129,23 +134,54 @@
   export default {
     data(){
       return {
+        slideToggle: false,
+        animateBack: false,
+        isVisibleHomeCard: true,
         isVisibleShareCard: false,
         isVisibleCollectCard: false,
         capitals: ['A','B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+        collected: false
       }
     },
     methods: {
-      showCollection(){
-        this.isVisibleCollectCard = true
+      toHomePage(){
+        this.$router.push('/homePage')
       },
-      hideCollection(){
+      showCollection(){
+        // 显示分享卡片
+        if(this.collected){
+          this.collected = false
+        } else {
+          console.log(this.isVisibleHomeCard, 'this.isVisibleHomeCard')
+          this.isVisibleCollectCard = true
+          // this.isVisibleShareCard = false
+          // this.isVisibleHomeCard = true
+        }
+      },
+       hideCollection(){
+        // 影藏收藏卡片
         this.isVisibleCollectCard = false
+        // this.isVisibleHomeCard = true
+      },
+      collect_click(){
+        this.collected = true
+        this.isVisibleCollectCard = false
+      //  this.isVisibleHomeCard = true
+      },
+      toggleFade(){
+        // this.isVisibleHomeCard = !this.isVisibleHomeCard
+        this.slideToggle = !this.slideToggle
+        this.animateBack =  !this.slideToggle
       },
       showShareCard(){
+        // 显示分享卡片
         this.isVisibleShareCard = true
+        this.isVisibleHomeCard = false
       },
       hideShareCard(){
+        // 取消分享卡片
         this.isVisibleShareCard = false
+        this.isVisibleHomeCard = true
       }
     },
     created(){}
@@ -187,6 +223,13 @@
       height: 370px;
       padding: 15px 30px;
       animation: bounce-in 1s;
+      &.animate {
+        animation: slide 0.5s;
+      }
+      &.animateBack {
+        //  animation: slide 0.5s reverse;
+        animation: slide_back 1s;
+      }
       .widget {
         text-align: center;
         span {
@@ -464,6 +507,16 @@
       }
     }
 
+    // 点击主页 上下滑动
+    @keyframes slide {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+         transform: translate(0, 80%);
+      }
+    }
+
 
     // 收藏卡片 动画效果
     .rotate-enter-active {
@@ -481,6 +534,7 @@
     }
 
   }
+  // 主页的动画效果
   .fade-enter-active {
     animation: fade-in 1s;
   }
@@ -494,7 +548,10 @@
     100% {
       opacity: 1;
     }
-  }     
+  }  
+
+
+
 
 }
 </style>
